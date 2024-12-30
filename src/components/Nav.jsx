@@ -9,10 +9,10 @@ export const NavBar = () => {
                 <span className="logo-part2">Connect</span>
             </div>
             <ul className="navbar-links">
-                <li><a href="#home" className="active">Home</a></li>
+                <li><a href="/" >Home</a></li>
                 <li><a href="#about-us">About Us</a></li>
                 <li><a href="#features">Features</a></li>
-                <li><a href="#community">Community</a></li>
+                <li><a href="/forum">Community</a></li>
             </ul>
             <button className="navbar-button">Login</button>
         </nav>

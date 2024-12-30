@@ -1,171 +1,181 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './CSS/forum.css';
+import Navbar from './Nav';
 
-const ForumPage = () => {
-  const styles = {
-    container: {
-      display: 'flex',
-      minHeight: '100vh',
-      backgroundColor: '#F5F5F5',
-      fontFamily: 'Arial, sans-serif',
+export default function Forum() {
+  const [activeTab, setActiveTab] = useState('new');
+  const [activePage, setActivePage] = useState('home');
+
+  const posts = [
+    {
+      id: 1,
+      author: 'Golanginya',
+      avatar: '/placeholder.svg?height=40&width=40',
+      time: '5 min ago',
+      title: 'Top 5 Tips for Managing Chemotherapy Side Effects',
+      preview: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat aliquet maecenas ut sit nulla',
+      views: 125,
+      comments: 15,
+      upvotes: 155
     },
-    sidebar: {
-      width: '250px',
-      backgroundColor: '#fff',
-      borderRight: '1px solid #E0E0E0',
-      padding: '20px',
+    {
+      id: 2,
+      author: 'Linuxoid',
+      avatar: '/placeholder.svg?height=40&width=40',
+      time: '25 min ago',
+      title: 'Understanding the Emotional Impact of a Cancer Diagnosis',
+      preview: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum vitae etiam lectus amet enim.',
+      views: 125,
+      comments: 15,
+      upvotes: 155
     },
-    mainContent: {
-      flex: 1,
-      padding: '20px',
-    },
-    rightSidebar: {
-      width: '300px',
-      backgroundColor: '#fff',
-      borderLeft: '1px solid #E0E0E0',
-      padding: '20px',
-    },
-    card: {
-      backgroundColor: '#fff',
-      border: '1px solid #E0E0E0',
-      borderRadius: '8px',
-      padding: '15px',
-      marginBottom: '15px',
-    },
-    cardHeader: {
-      display: 'flex',
-      alignItems: 'center',
-      marginBottom: '10px',
-    },
-    avatar: {
-      width: '40px',
-      height: '40px',
-      borderRadius: '50%',
-      marginRight: '10px',
-    },
-    cardBody: {
-      marginBottom: '10px',
-    },
-    cardFooter: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      fontSize: '14px',
-      color: '#888',
-    },
-    buttonGroup: {
-      display: 'flex',
-      gap: '10px',
-      marginBottom: '20px',
-    },
-    button: {
-      padding: '8px 16px',
-      borderRadius: '20px',
-      border: 'none',
-      cursor: 'pointer',
-    },
-    activeButton: {
-      backgroundColor: '#3B82F6',
-      color: '#fff',
-    },
-    postLinks: {
-      marginBottom: '20px',
-    },
-    postLink: {
-      display: 'block',
-      color: '#3B82F6',
-      textDecoration: 'none',
-      marginBottom: '10px',
-    },
-  };
+    {
+      id: 3,
+      author: 'AizhanMaratovna',
+      avatar: '/placeholder.svg?height=40&width=40',
+      time: '2 days ago',
+      title: 'Benefits of Joining a Cancer Support Group',
+      preview: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat aliquet maecenas ut sit nulla',
+      views: 125,
+      comments: 15,
+      upvotes: 155
+    }
+  ];
+
+  const mustReadPosts = [
+    'Please read rules before you start working on a platform',
+    'Vision & Strategy of Alemhelp'
+  ];
+
+  const featuredLinks = [
+    'Alemhelp source-code on GitHub',
+    'Golang best-practices',
+    'Alem.School dashboard'
+  ];
 
   return (
-    <div style={styles.container}>
+    <div className="container">
       {/* Left Sidebar */}
-      <div style={styles.sidebar}>
-        <h3>MENU</h3>
-        <ul style={{ listStyleType: 'none', padding: 0 }}>
-          <li style={{ marginBottom: '10px' }}>
-            <a href="#" style={{ textDecoration: 'none', color: '#3B82F6' }}>
+      <aside className="sidebar">
+        <div className="search-container">
+          <input type="text" placeholder="Search" className="search-input" />
+          <span className="search-icon">🔍</span>
+        </div>
+        <nav>
+          <ul className="nav-menu">
+            <li className={`nav-item ${activePage === 'home' ? 'active' : ''}`}>
+              <span>📱</span>
               Questions
-            </a>
-          </li>
-          <li style={{ marginBottom: '10px' }}>
-            <a href="#" style={{ textDecoration: 'none', color: '#333' }}>
+            </li>
+            <li className={`nav-item ${activePage === 'tags' ? 'active' : ''}`}>
+              <span>🏷️</span>
               Tags
-            </a>
-          </li>
-          <li style={{ marginBottom: '10px' }}>
-            <a href="#" style={{ textDecoration: 'none', color: '#333' }}>
+            </li>
+            <li className={`nav-item ${activePage === 'ranking' ? 'active' : ''}`}>
+              <span>📊</span>
               Ranking
-            </a>
-          </li>
-        </ul>
-      </div>
+            </li>
+          </ul>
+        </nav>
+      </aside>
 
       {/* Main Content */}
-      <div style={styles.mainContent}>
-        <div style={styles.buttonGroup}>
-          <button style={{ ...styles.button, ...styles.activeButton }}>New</button>
-          <button style={styles.button}>Top</button>
-          <button style={styles.button}>Hot</button>
-          <button style={styles.button}>Closed</button>
+      <main className="main-content">
+        <div className="filter-tabs">
+          <button 
+            className={`tab ${activeTab === 'new' ? 'active' : ''}`}
+            onClick={() => setActiveTab('new')}
+          >
+            New
+          </button>
+          <button 
+            className={`tab ${activeTab === 'top' ? 'active' : ''}`}
+            onClick={() => setActiveTab('top')}
+          >
+            Top
+          </button>
+          <button 
+            className={`tab ${activeTab === 'hot' ? 'active' : ''}`}
+            onClick={() => setActiveTab('hot')}
+          >
+            Hot
+          </button>
+          <button 
+            className={`tab ${activeTab === 'closed' ? 'active' : ''}`}
+            onClick={() => setActiveTab('closed')}
+          >
+            Closed
+          </button>
         </div>
 
-        {/* Card */}
-        {[1, 2, 3].map((_, index) => (
-          <div key={index} style={styles.card}>
-            <div style={styles.cardHeader}>
-              <img
-                src="https://via.placeholder.com/40"
-                alt="User Avatar"
-                style={styles.avatar}
-              />
-              <div>
-                <strong>Username</strong>
-                <p style={{ fontSize: '12px', color: '#888' }}>5 min ago</p>
+        <div className="post-list">
+          {posts.map(post => (
+            <article key={post.id} className="post-card">
+              <div className="post-header">
+                <div className="user-info">
+                  <img src={post.avatar} alt={post.author} className="avatar" />
+                  <div className="user-meta">
+                    <span className="username">{post.author}</span>
+                    <span className="post-time">{post.time}</span>
+                  </div>
+                </div>
+                <button className="more-options">⋮</button>
               </div>
-            </div>
-            <div style={styles.cardBody}>
-              <h4>Title of the Question</h4>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Consequat aliquet maecenas ut sit nulla.
-              </p>
-            </div>
-            <div style={styles.cardFooter}>
-              <span>125 views</span>
-              <span>15 comments</span>
-              <span>155 votes</span>
-            </div>
-          </div>
-        ))}
-      </div>
+              <h2 className="post-title">{post.title}</h2>
+              <p className="post-preview">{post.preview}</p>
+              <div className="post-metrics">
+                <span className="metric">👁️ {post.views}</span>
+                <span className="metric">💬 {post.comments}</span>
+                <span className="metric">⬆️ {post.upvotes}</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </main>
 
       {/* Right Sidebar */}
-      <div style={styles.rightSidebar}>
-        <div style={styles.postLinks}>
-          <h4>Must-read posts</h4>
-          <a href="#" style={styles.postLink}>
-            Please read rules before you start working on a platform
-          </a>
-          <a href="#" style={styles.postLink}>
-            Vision & Strategy of Alemhelp
-          </a>
-        </div>
-        <div style={styles.postLinks}>
-          <h4>Featured links</h4>
-          <a href="#" style={styles.postLink}>
-            Alemhelp source-code on GitHub
-          </a>
-          <a href="#" style={styles.postLink}>
-            Golang best-practices
-          </a>
-          <a href="#" style={styles.postLink}>
-            Alem.School dashboard
-          </a>
-        </div>
-      </div>
+      <aside className="right-sidebar">
+        <section className="sidebar-section">
+          <h3 className="section-title">⭐ Must-read posts</h3>
+          <ul className="link-list">
+            {mustReadPosts.map((post, index) => (
+              <li key={index} className="link-item">{post}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="sidebar-section">
+          <h3 className="section-title">🔗 Featured links</h3>
+          <ul className="link-list">
+            {featuredLinks.map((link, index) => (
+              <li key={index} className="link-item">{link}</li>
+            ))}
+          </ul>
+        </section>
+      </aside>
+
+      {/* Mobile Navigation */}
+      <nav className="mobile-nav">
+        <ul className="mobile-nav-list">
+          <li className={`mobile-nav-item ${activePage === 'home' ? 'active' : ''}`}>
+            <span>🏠</span>
+            Home
+          </li>
+          <li className={`mobile-nav-item ${activePage === 'search' ? 'active' : ''}`}>
+            <span>🔍</span>
+            Search
+          </li>
+          <li className={`mobile-nav-item ${activePage === 'tags' ? 'active' : ''}`}>
+            <span>🏷️</span>
+            Tags
+          </li>
+          <li className={`mobile-nav-item ${activePage === 'ranking' ? 'active' : ''}`}>
+            <span>📊</span>
+            Ranking
+          </li>
+        </ul>
+      </nav>
     </div>
   );
-};
+}
 
-export default ForumPage;

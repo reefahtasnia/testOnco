@@ -1,94 +1,110 @@
-import React from "react";
-import ArrowLeft  from "./assets/ArrowLeft.png";
-import group427320702 from "./assets/group-427320702.png";
-import group from "./assets/group.png";
-import image from "./assets/image.png";
-import line48 from "./assets/line-48.svg";
-import line49 from "./assets/line-49.svg";
-import loginpgbg1 from "./assets/loginpgbg-1.png";
-import "./CSS/style.css";
+import React, { useState } from 'react';
+import './CSS/login.css';
+import background from "./assets/loginbg.png";
+import { ArrowLeft } from 'lucide-react';
 
-export const LogIn = () => {
-    return (
-        <div className="log-in">
-            <div className="overlap-group-wrapper">
-                <div className="overlap-group">
-                    <img className="loginpgbg" alt="Loginpgbg" src={loginpgbg1} />
+export default function Login() {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const [isSliding, setIsSliding] = useState(false);
 
-                    <div className="form">
-                        <div className="group">
-                            <img className="arrow-left" alt="Arrow Left" src={ArrowLeft} />
-                        </div>
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
-                        <div className="text-wrapper">Log In</div>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission
+    console.log(formData);
+  };
 
-                        <div className="frame">
-                            <div className="div">
-                                <div className="frame-2">
-                                    <div className="frame-3">
-                                        <div className="frame-4">
-                                            <div className="frame-5">
-                                                <img className="img" alt="Group" src={group} />
+  const handleSignUpClick = (e) => {
+    e.preventDefault();
+    setIsSliding(true);
+    // Add a slight delay before navigation to allow animation to complete
+    setTimeout(() => {
+      window.location.href = '/signup';
+    }, 600);
+  };
 
-                                                <div className="following">Your email</div>
-                                            </div>
-
-                                            <div className="frame-6">
-                                                <img className="group-2" alt="Group" src={image} />
-
-                                                <div className="following">Password</div>
-                                            </div>
-
-                                            <div className="frame-7">
-                                                <div className="group-3" />
-
-                                                <div className="following-2">User Type</div>
-                                            </div>
-                                        </div>
-
-                                        <div className="following-wrapper">
-                                            <div className="following-3">Log In</div>
-                                        </div>
-                                    </div>
-
-                                    <div className="div-wrapper">
-                                        <div className="following-4">Forgot password?</div>
-                                    </div>
-                                </div>
-
-                                <div className="frame-8">
-                                    <div className="frame-9">
-                                        <img className="line" alt="Line" src={line48} />
-
-                                        <div className="following-5">or</div>
-
-                                        <img className="line" alt="Line" src={line49} />
-                                    </div>
-
-                                    <div className="frame-wrapper">
-                                        <div className="frame-10">
-                                            <img
-                                                className="group-4"
-                                                alt="Group"
-                                                src={group427320702}
-                                            />
-
-                                            <div className="following-6">Google</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="frame-11">
-                                <div className="following-7">Don’t have an account?</div>
-
-                                <div className="following-4">Sign Up</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  return (
+    <div className="auth-container">
+      <div className={`form-panel ${isSliding ? 'slide-left' : ''}`}>
+        <div className={`form-container ${isSliding ? 'fade-out' : ''}`}>
+        <button onClick={() => window.location.href = '/'} className="back-button">
+            <ArrowLeft size={20} />
+            <span>Back to Home</span>
+          </button>
+          <h1 className="form-title">Log In</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="input-group">
+              <span className="input-icon">
+                ✉️
+              </span>
+              <input
+                type="email"
+                name="email"
+                className="form-input"
+                placeholder="Your email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
             </div>
+            <div className="input-group">
+              <span className="input-icon">
+                🔑
+              </span>
+              <input
+                type="password"
+                name="password"
+                className="form-input"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <button type="submit" className="auth-button">
+              Log In
+            </button>
+          </form>
+
+          <div className="forgot-password">
+            <a href="/forgot-password">Forgot password?</a>
+          </div>
+          
+          <div className="divider">
+            <span>or</span>
+          </div>
+          
+          <button className="google-button">
+            <img 
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%234285F4' d='M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z'/%3E%3Cpath fill='%2334A853' d='M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z'/%3E%3Cpath fill='%23FBBC05' d='M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z'/%3E%3Cpath fill='%23EA4335' d='M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z'/%3E%3C/svg%3E"
+              alt="Google Logo"
+              width="24"
+              height="24"
+            />
+            Google
+          </button>
+          
+          <div className="auth-link">
+            Don't have an account? <a href="/signup" onClick={handleSignUpClick}>Sign Up</a>
+          </div>
         </div>
-    );
-};
-export default LogIn;
+      </div>
+      <div className={`image-panel ${isSliding ? 'slide-left' : ''}`}>
+        <img 
+          src={background} 
+          alt="Purple awareness ribbon in hands"
+        />
+      </div>
+    </div>
+  );
+}
+
