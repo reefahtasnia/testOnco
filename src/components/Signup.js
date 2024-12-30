@@ -1,97 +1,63 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from "react";
 
-const Signup = () => {
-    const [formData, setFormData] = useState({
-        username: '',
-        password: '',
-        name: '',
-        mobile: '',
-        gender: '',
-        age: '',
-    });
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:5000/signup', formData);
-            alert(response.data.message);
-        } catch (error) {
-            alert(error.response?.data?.message || 'Failed to sign up');
-        }
-    };
-
+export default function Main() {
     return (
-        <div style={{ maxWidth: '400px', margin: 'auto' }}>
-            <h2>Signup Form</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Username:</label>
-                    <input
-                        type="text"
-                        name="username"
-                        value={formData.username}
-                        onChange={handleChange}
-                        required
-                    />
+        <div className="main-container">
+            <div className="image-container">
+                <img
+                    src="./assets/loginbg 1.png"
+                    alt="Purple Ribbon"
+                    className="main-image"
+                />
+            </div>
+            <div className="form-container">
+                <div className="group">
+                    <span className="text">Sign Up</span>
+                    <div className="section">
+                        <div className="input-group">
+                            <div className="input-box">
+                                <span className="icon email-icon"></span>
+                                <input
+                                    type="email"
+                                    placeholder="Your email"
+                                    className="input-field"
+                                />
+                            </div>
+                            <div className="input-box">
+                                <span className="icon password-icon"></span>
+                                <input
+                                    type="password"
+                                    placeholder="Password"
+                                    className="input-field"
+                                />
+                            </div>
+                            <div className="input-box">
+                                <span className="icon gender-icon"></span>
+                                <input
+                                    type="text"
+                                    placeholder="Gender"
+                                    className="input-field"
+                                />
+                            </div>
+                        </div>
+                        <button className="sign-up-button">Sign Up</button>
+                        <div className="or-section">
+                            <hr className="divider" />
+                            <span>or</span>
+                            <hr className="divider" />
+                        </div>
+                        <button className="google-sign-in">
+                            <span className="google-icon"></span> Google
+                        </button>
+                    </div>
+                    <div className="footer">
+                        <span>Already have an account?</span>
+                        <a href="#" className="log-in-link">
+                            Log In
+                        </a>
+                    </div>
                 </div>
-                <div>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Name:</label>
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Mobile:</label>
-                    <input
-                        type="text"
-                        name="mobile"
-                        value={formData.mobile}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Gender:</label>
-                    <select name="gender" value={formData.gender} onChange={handleChange} required>
-                        <option value="">Select</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Age:</label>
-                    <input
-                        type="number"
-                        name="age"
-                        value={formData.age}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <button type="submit">Sign Up</button>
-            </form>
+            </div>
         </div>
     );
-};
-
-export default Signup;
+}
