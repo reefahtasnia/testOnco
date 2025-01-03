@@ -16,6 +16,9 @@ import DoctorDashboard from './dashboard.js';
 import UserDashboard from './user-dashboard/dashboard.js';
 import UserMedicines from './user-dashboard/medicine.js';
 import UserMessages from './user-dashboard/messages.js';
+import Mental from './components/MentalHealthPage.js';
+import Donation from './components/Donation.js';
+import Ai from './components/Ai.js';
 
 const PageWrapper = ({ children }) => {
     const location = useLocation();
@@ -56,6 +59,9 @@ function App() {
                 <Route path="/newquestion" element={<NewQuestion />} />
                 <Route path="/viewpost" element={<ViewPost />} />
                 <Route path="/doctor" element={<DoctorDashboard />} />
+                <Route path="/mental" element={<Mental />} />
+                <Route path="/ai" element={<Ai />} />
+                <Route path="/donation" element={<Donation />} />
                 <Route path="/user" element={<UserDashboard  />}/>
                 <Route path="/user/medicine" element={<UserMedicines  />} />
                 <Route path="/user/messages" element={<UserMessages />} />

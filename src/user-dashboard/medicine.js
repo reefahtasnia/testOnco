@@ -4,6 +4,8 @@ import { useState } from "react";
 import Sidebar from "./components/sidebar";
 import BottomNav from "./components/bottom-nav";
 import pillImage from "./pill.png";
+
+
 import "./medicine.css";
 
 export default function MedicinesPage() {
