@@ -37,6 +37,7 @@ body {
   top: 0;
   z-index: 1000;
 }
+
 .navbar-logo {
   display: flex;
   align-items: center;
@@ -58,6 +59,9 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .navbar-links li a {
@@ -65,43 +69,89 @@ body {
   color: var(--color-black);
   font-size: var(--font-size-base);
   font-weight: 500;
+  transition: color 0.3s ease;
 }
 
-.navbar-links li a:hover,
-.navbar-links li a.active {
+.navbar-links li a:hover {
   color: var(--color-primary);
 }
 
 .navbar-button {
-  background-color: var(--color-button-bg);
-  color: var(--color-white);
-  border: none;
   padding: 10px 20px;
-  font-size: var(--font-size-large);
-  font-weight: bold;
   border-radius: 4px;
+  border: none;
+  background-color: var(--color-primary);
+  color: var(--color-white);
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .navbar-button:hover {
-  background-color: var(--color-primary);
+  background-color: var(--color-link-hover);
 }
+
+.mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: var(--color-black);
+}
+
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: block;
+}
+
 @media (max-width: 768px) {
-  .navbar {
-    flex-wrap: wrap;
+  .mobile-menu-button {
+      display: block;
+      order: 1;
   }
 
-  .navbar-links {
-    flex-direction: column;
-    width: 100%;
-    gap: 10px;
-    margin-top: 10px;
+  .navbar-logo {
+      order: 0;
   }
 
   .navbar-button {
-    width: 100%;
-    text-align: center;
-    margin-top: 10px;
+      order: 2;
+  }
+
+  .navbar-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background-color: var(--color-white);
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transform: none;
+  }
+
+  .navbar-links.open {
+      display: flex;
+  }
+
+  .mobile-only {
+      display: block;
+  }
+
+  .desktop-only {
+      display: none;
+  }
+
+  .navbar-links .mobile-only {
+      margin-top: 10px;
+  }
+
+  .navbar-links .navbar-button {
+      width: 100%;
   }
 }
 
